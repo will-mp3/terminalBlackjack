@@ -8,6 +8,15 @@ class Deck:
         self.deckCount = deckCount
         self.deck = [(card, suit) for card in Deck.CARDS for suit in Deck.SUITS] * self.deckCount
 
+    def shuffleDeck(self):
+        random.shuffle(self.deck)
+
+    def dealCard(self):
+        val = random.randint(0, 52 * self.deckCount)
+        card = self.deck[val]
+        self.deck.remove(card)
+        return card
+
     @classmethod
     def cardVal(cls, card):
         if card[0] in ['Jack', 'Queen', 'King']:
@@ -17,13 +26,9 @@ class Deck:
         else:
             return int(card[0])
 
-    def shuffleDeck(self):
-        random.shuffle(self.deck)
-
-    def dealCard(self):
-        val = random.randint(0, 52 * self.deckCount)
-        card = self.deck[val]
-        return card
+    @classmethod
+    def printCard(cls, card):
+        return str(card[0]) + " of " + str(card[1])
 
     
 def main():
@@ -32,6 +37,7 @@ def main():
     card = deck.dealCard()
     print(card)
     print(Deck.cardVal(card))
+    print(Deck.printCard(card))
 
 if __name__ == "__main__":
     main()
