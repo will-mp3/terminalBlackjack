@@ -18,15 +18,6 @@ class Deck:
         return card
 
     @classmethod
-    def cardVal(cls, card):
-        if card[0] in ['Jack', 'Queen', 'King']:
-            return 10
-        elif card[0] == 'Ace':
-            return 11
-        else:
-            return int(card[0])
-
-    @classmethod
     def printCard(cls, card):
         return str(card[0]) + " of " + str(card[1])
 
