@@ -17,10 +17,6 @@ class Deck:
         self.deck.remove(card)
         return card
 
-    @classmethod
-    def printCard(cls, card):
-        return str(card[0]) + " of " + str(card[1])
-
     
 def main():
     deck = Deck()
