@@ -32,7 +32,7 @@ class Blackjack:
 
         print("The dealer is showing a", dealerHand[0].printCard())
         print()
-        print("You have", playerHand[0].printCard(), "and", playerHand[1].printCard())
+        print("You have", playerHand[0].printCard() + ",", playerHand[1].printCard())
         print()
         playerCount = playerHand[0].getVal() + playerHand[1].getVal()
 
@@ -48,8 +48,14 @@ class Blackjack:
             if move == "H":
                 while 1:
                     playerHand.append(self.deck.dealCard())
-                    print("You have", playerHand[0].printCard(), "and", playerHand[1].printCard(), "and", playerHand[len(playerHand) - 1].printCard())
+
+                    print("You have", playerHand[0].printCard() + ",", playerHand[1].printCard(), end="")
+
+                    for i in range(len(playerHand) - 2): # prints the third card onward
+                        print(",", playerHand[2 + i].printCard(), end=" ")
+
                     print()
+
                     playerCount += playerHand[len(playerHand) - 1].getVal()
                     val = Blackjack.cardEval(playerCount)
                     break
