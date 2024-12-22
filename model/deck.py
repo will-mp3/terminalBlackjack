@@ -1,4 +1,5 @@
 import random
+from card import Card
 
 class Deck:
     SUITS = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
@@ -6,7 +7,7 @@ class Deck:
 
     def __init__(self, deckCount = 2):
         self.deckCount = deckCount
-        self.deck = [(card, suit) for card in Deck.CARDS for suit in Deck.SUITS] * self.deckCount
+        self.deck = [Card(card, suit) for card in Deck.CARDS for suit in Deck.SUITS] * self.deckCount
 
     def shuffleDeck(self):
         random.shuffle(self.deck)
@@ -23,8 +24,8 @@ def main():
     deck.shuffleDeck()
     card = deck.dealCard()
     print(card)
-    print(Deck.cardVal(card))
-    print(Deck.printCard(card))
+    print(card.getVal())
+    print(card.printCard())
 
 if __name__ == "__main__":
     main()
