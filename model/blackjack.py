@@ -52,11 +52,11 @@ class Blackjack:
                     print()
                     playerCount += playerHand[len(playerHand) - 1].getVal()
                     val = Blackjack.cardEval(playerCount)
-                    if val == 1:
-                        continue
-                    else:
-                        break
-                break
+                    break
+                if val == 1:
+                    continue
+                else:
+                    break
             elif move == "S":
                 break
             elif move == "D":
