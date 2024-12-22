@@ -1,4 +1,5 @@
 from deck import Deck
+from card import Card
 
 class Blackjack:
 
@@ -6,8 +7,8 @@ class Blackjack:
         self.table = table
         self.deck = deck
 
-    @classmethod
-    def cardEval(cls, count):
+    @staticmethod
+    def cardEval(count):
         if count <= 21:
             return 1
         else:
@@ -29,11 +30,11 @@ class Blackjack:
         playerHand.append(self.deck.dealCard())
         dealerHand.append(self.deck.dealCard())
 
-        print("The dealer is showing a", Deck.printCard(dealerHand[0]))
+        print("The dealer is showing a", dealerHand[0].printCard())
         print()
-        print("You have", Deck.printCard(playerHand[0]), "and", Deck.printCard(playerHand[1]))
+        print("You have", playerHand[0].printCard(), "and", playerHand[1].printCard())
         print()
-        playerCount = Deck.cardVal(playerHand[0]) + Deck.cardVal(playerHand[1])
+        playerCount = playerHand[0].getVal() + playerHand[1].getVal()
 
         if playerCount == 21:
             print("Blackjack! You win.")
@@ -47,9 +48,9 @@ class Blackjack:
             if move == "H":
                 while 1:
                     playerHand.append(self.deck.dealCard())
-                    print("You have", Deck.printCard(playerHand[0]), "and", Deck.printCard(playerHand[1]), "and", Deck.printCard(playerHand[len(playerHand) - 1]))
+                    print("You have", playerHand[0].printCard(), "and", playerHand[1].printCard(), "and", playerHand[len(playerHand) - 1].printCard())
                     print()
-                    playerCount += Deck.cardVal(playerHand[len(playerHand) - 1])
+                    playerCount += playerHand[len(playerHand) - 1].getVal()
                     val = Blackjack.cardEval(playerCount)
                     if val == 1:
                         continue
@@ -61,7 +62,7 @@ class Blackjack:
             elif move == "D":
                 # double bet logic
                 playerHand.append(self.deck.dealCard())
-                playerVal += Deck.cardVal(playerHand[2])
+                playerVal += playerHand[2].getVal()
                 break
             else:
                 print("Invalid response, please respond again.")
