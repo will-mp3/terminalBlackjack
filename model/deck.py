@@ -13,7 +13,7 @@ class Deck:
         random.shuffle(self.deck)
 
     def dealCard(self):
-        val = random.randint(0, 51 * self.deckCount)
+        val = random.randint(0, len(self.deck) - 1)
         card = self.deck[val]
         self.deck.remove(card)
         return card
@@ -23,7 +23,6 @@ def main():
     deck = Deck()
     deck.shuffleDeck()
     card = deck.dealCard()
-    print(card)
     print(card.getVal())
     print(card.printCard())
 
