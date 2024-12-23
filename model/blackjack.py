@@ -6,37 +6,52 @@ class Blackjack:
     def __init__(self, deck, table):
         self.table = table
         self.deck = deck
+        self.dealerHand, self.playerHand = [], []
+        self.playerCount = 0
 
     @staticmethod
     def cardEval(count):
         if count <= 21:
-            return 1
+            return True
         else:
             print("Player bust.")
             print()
-            return 0
+            return False
+    
+    def _hit(self):
+        self.playerHand.append(self.deck.dealCard())
+
+        print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard(), end="")
+
+        for i in range(len(self.playerHand) - 2): # prints the third card onward
+            print(",", self.playerHand[2 + i].printCard(), end="")
+            print()
+        print()
+
+        self.playerCount += self.playerHand[len(self.playerHand) - 1].getVal()
+                    
+        val = Blackjack.cardEval(self.playerCount)
+
+        return val
 
     def run(self):
         self.deck.shuffleDeck()
         print("Welcome to the table! Please take a seat and place your bets.")
         print()
 
-        # code to place bets
-        dealerHand, playerHand = [], []
-
         # deal cards, in this order
-        playerHand.append(self.deck.dealCard())
-        dealerHand.append(self.deck.dealCard())
-        playerHand.append(self.deck.dealCard())
-        dealerHand.append(self.deck.dealCard())
+        self.playerHand.append(self.deck.dealCard())
+        self.dealerHand.append(self.deck.dealCard())
+        self.playerHand.append(self.deck.dealCard())
+        self.dealerHand.append(self.deck.dealCard())
 
-        print("The dealer is showing a", dealerHand[0].printCard())
+        print("The dealer is showing a", self.dealerHand[0].printCard())
         print()
-        print("You have", playerHand[0].printCard() + ",", playerHand[1].printCard())
+        print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard())
         print()
-        playerCount = playerHand[0].getVal() + playerHand[1].getVal()
+        self.playerCount = self.playerHand[0].getVal() + self.playerHand[1].getVal()
 
-        if playerCount == 21:
+        if self.playerCount == 21:
             print("Blackjack! You win.")
             print()
             # payout logic
@@ -46,29 +61,16 @@ class Blackjack:
             move = input("Would you like to hit, stand, or double: (H/S/D)")
             print()
             if move == "H":
-                while 1:
-                    playerHand.append(self.deck.dealCard())
+                val = self._hit()
+                
 
-                    print("You have", playerHand[0].printCard() + ",", playerHand[1].printCard(), end="")
-
-                    for i in range(len(playerHand) - 2): # prints the third card onward
-                        print(",", playerHand[2 + i].printCard(), end=" ")
-
-                    print()
-
-                    playerCount += playerHand[len(playerHand) - 1].getVal()
-                    val = Blackjack.cardEval(playerCount)
-                    break
-                if val == 1:
-                    continue
-                else:
-                    break
             elif move == "S":
                 break
+
             elif move == "D":
                 # double bet logic
-                playerHand.append(self.deck.dealCard())
-                playerVal += playerHand[2].getVal()
+                self.playerHand.append(self.deck.dealCard())
+                playerVal += self.playerHand[2].getVal()
                 break
             else:
                 print("Invalid response, please respond again.")
