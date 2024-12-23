@@ -8,6 +8,7 @@ class Blackjack:
         self.deck = deck
         self.dealerHand, self.playerHand = [], []
         self.playerCount = 0
+        self.dealerCount = 0
 
     def _cardEval(self):
 
@@ -16,6 +17,16 @@ class Blackjack:
         else:
             print()
             print("Player bust.")
+            print()
+            return False
+
+    def _dealerEval(self):
+
+        if self.dealerCount <= 21:
+            return True
+        else:
+            print()
+            print("Dealer bust.")
             print()
             return False
 
@@ -43,6 +54,21 @@ class Blackjack:
 
         return val
 
+    def _dealerHit(self):
+        self.dealerHand.append(self.deck.dealCard())
+
+        print("Dealer showing", self.dealerHand[0].printCard() + ",", self.dealerHand[1].printCard(), end="")
+
+        for i in range(len(self.dealerHand) - 2): # prints the third card onward
+            print(",", self.dealerHand[2 + i].printCard(), end="")
+        print()
+
+        self.dealerCount += self.dealerHand[len(self.dealerHand) - 1].getVal()
+                    
+        val = self._dealerEval()
+
+        return val
+
     def run(self):
 
         self.deck.shuffleDeck()
@@ -60,6 +86,7 @@ class Blackjack:
         print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard())
         print()
         self.playerCount = self.playerHand[0].getVal() + self.playerHand[1].getVal()
+        self.dealerCount = self.dealerHand[0].getVal() + self.dealerHand[1].getVal()
 
         if self._checkBJ():
             return
@@ -86,6 +113,22 @@ class Blackjack:
             else:
                 print("Invalid response, please respond again.")
                 print()
+        
+        if self.playerCount > 21:
+            return
+        
+        if self.dealerCount == 21:
+            print("Dealer showing 21. You lose.")
+            return
+        elif self.dealerCount >= 17:
+            if self.dealerCount > self.playerCount:
+                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You lose.")
+            elif self.dealerCount < self.playerCount:
+                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You win!")
+            else:
+                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". Push.")
+        else:
+
 
 def main():
     deck = Deck()
