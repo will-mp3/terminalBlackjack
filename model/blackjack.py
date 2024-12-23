@@ -10,6 +10,7 @@ class Blackjack:
         self.playerCount = 0
 
     def _cardEval(self):
+        
         if self.playerCount <= 21:
             return True
         else:
@@ -17,8 +18,16 @@ class Blackjack:
             print("Player bust.")
             print()
             return False
-    
+
+    def _checkBJ(self):
+
+        if self.playerCount == 21:
+            return True
+        else:
+            return False
+            
     def _hit(self):
+
         self.playerHand.append(self.deck.dealCard())
 
         print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard(), end="")
@@ -34,6 +43,7 @@ class Blackjack:
         return val
 
     def run(self):
+
         self.deck.shuffleDeck()
         print("Welcome to the table! Please take a seat and place your bets.")
         print()
@@ -50,11 +60,8 @@ class Blackjack:
         print()
         self.playerCount = self.playerHand[0].getVal() + self.playerHand[1].getVal()
 
-        if self.playerCount == 21:
-            print("Blackjack! You win.")
-            print()
+        if self._checkBJ():
             return
-            # payout logic
 
         # hit or stand logic
         while 1:
