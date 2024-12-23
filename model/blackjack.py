@@ -20,16 +20,6 @@ class Blackjack:
             print()
             return False
 
-    def _dealerEval(self):
-
-        if self.dealerCount <= 21:
-            return True
-        else:
-            print()
-            print("Dealer bust.")
-            print()
-            return False
-
     def _checkBJ(self):
 
         if self.playerCount == 21:
@@ -64,10 +54,6 @@ class Blackjack:
         print()
 
         self.dealerCount += self.dealerHand[len(self.dealerHand) - 1].getVal()
-                    
-        val = self._dealerEval()
-
-        return val
 
     def run(self):
 
@@ -134,12 +120,15 @@ class Blackjack:
             print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard())
             print()
             while 1:
-                dVal = self._dealerHit()
-                if dVal:
-                    continue
-                else:
+                self._dealerHit()
+                if self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount > self.playerCount: 
+                    print("You lose.")
                     break
-
+                elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount < self.playerCount:
+                    print("You win!")
+                    break
+                else:
+                    continue
 
 def main():
     deck = Deck()
