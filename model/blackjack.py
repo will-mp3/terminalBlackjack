@@ -123,11 +123,22 @@ class Blackjack:
         elif self.dealerCount >= 17:
             if self.dealerCount > self.playerCount:
                 print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You lose.")
+                print()
             elif self.dealerCount < self.playerCount:
                 print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You win!")
+                print()
             else:
                 print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". Push.")
+                print()
         else:
+            print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard())
+            print()
+            while 1:
+                dVal = self._dealerHit()
+                if dVal:
+                    continue
+                else:
+                    break
 
 
 def main():
