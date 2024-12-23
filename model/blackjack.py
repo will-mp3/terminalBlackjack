@@ -9,11 +9,11 @@ class Blackjack:
         self.dealerHand, self.playerHand = [], []
         self.playerCount = 0
 
-    @staticmethod
-    def cardEval(count):
-        if count <= 21:
+    def _cardEval(self):
+        if self.playerCount <= 21:
             return True
         else:
+            print()
             print("Player bust.")
             print()
             return False
@@ -25,12 +25,11 @@ class Blackjack:
 
         for i in range(len(self.playerHand) - 2): # prints the third card onward
             print(",", self.playerHand[2 + i].printCard(), end="")
-            print()
         print()
 
         self.playerCount += self.playerHand[len(self.playerHand) - 1].getVal()
                     
-        val = Blackjack.cardEval(self.playerCount)
+        val = self._cardEval()
 
         return val
 
@@ -54,6 +53,7 @@ class Blackjack:
         if self.playerCount == 21:
             print("Blackjack! You win.")
             print()
+            return
             # payout logic
 
         # hit or stand logic
@@ -62,7 +62,10 @@ class Blackjack:
             print()
             if move == "H":
                 val = self._hit()
-                
+                if val:
+                    continue
+                else:
+                    break
 
             elif move == "S":
                 break
