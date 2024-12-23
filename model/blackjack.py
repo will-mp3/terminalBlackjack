@@ -10,7 +10,7 @@ class Blackjack:
         self.playerCount = 0
 
     def _cardEval(self):
-        
+
         if self.playerCount <= 21:
             return True
         else:
@@ -22,6 +22,7 @@ class Blackjack:
     def _checkBJ(self):
 
         if self.playerCount == 21:
+            print("Blackjack! You win.")
             return True
         else:
             return False
