@@ -70,7 +70,6 @@ class Blackjack:
         print("The dealer is showing a", self.dealerHand[0].printCard())
         print()
         print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard())
-        print()
         self.playerCount = self.playerHand[0].getVal() + self.playerHand[1].getVal()
         self.dealerCount = self.dealerHand[0].getVal() + self.dealerHand[1].getVal()
 
@@ -79,6 +78,7 @@ class Blackjack:
 
         # hit or stand logic
         while 1:
+            print()
             move = input("Would you like to hit, stand, or double: (H/S/D)")
             print()
             if move == "H":
@@ -122,9 +122,11 @@ class Blackjack:
             while 1:
                 self._dealerHit()
                 if self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount > self.playerCount: 
+                    print()
                     print("You lose.")
                     break
                 elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount < self.playerCount:
+                    print()
                     print("You win!")
                     break
                 else:
