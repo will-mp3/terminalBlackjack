@@ -17,14 +17,3 @@ class Deck:
         card = self.deck[val]
         self.deck.remove(card)
         return card
-
-    
-def main():
-    deck = Deck()
-    deck.shuffleDeck()
-    card = deck.dealCard()
-    print(card.getVal())
-    print(card.printCard())
-
-if __name__ == "__main__":
-    main()
