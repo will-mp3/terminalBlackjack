@@ -9,6 +9,23 @@ class Blackjack:
         self.dealerHand, self.playerHand = [], []
         self.playerCount = 0
         self.dealerCount = 0
+        self.playerChips = 100
+
+    def _clear(self):
+        self.dealerHand, self.playerHand = [], []
+        self.playerCount = 0
+        self.dealerCount = 0
+
+    def _playAgain(self):
+        choice = input("Would you like to play again? (Y/N) ")
+        print()
+        if choice == "Y":
+            self.run()
+        elif choice == "N":
+            return False
+        else:
+            print("Invalid input.")
+            self._playAgain()
 
     def _cardEval(self):
 
@@ -56,10 +73,19 @@ class Blackjack:
         self.dealerCount += self.dealerHand[len(self.dealerHand) - 1].getVal()
 
     def run(self):
+        self._clear()
 
         self.deck.shuffleDeck()
         print("Welcome to the table! Please take a seat and place your bets.")
         print()
+        while 1:
+            bet = input("BET AMOUNT: ")
+            if bet <= self.playerChips:
+                break
+            else:
+                print("Invalid bet amount.")
+                print()
+                continue
 
         # deal cards, in this order
         self.playerHand.append(self.deck.dealCard())
@@ -74,12 +100,15 @@ class Blackjack:
         self.dealerCount = self.dealerHand[0].getVal() + self.dealerHand[1].getVal()
 
         if self._checkBJ():
-            return
+            playerChips += bet * 1.5
+            choice = self._playAgain()
+            if not choice:
+                return
 
         # hit or stand logic
         while 1:
             print()
-            move = input("Would you like to hit, stand, or double: (H/S/D)")
+            move = input("Would you like to hit, stand, or double: (H/S/D) ")
             print()
             if move == "H":
                 val = self._hit()
