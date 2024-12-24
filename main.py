@@ -1,7 +1,8 @@
 from model.blackjack import Blackjack
 
 def main():
-    game = Blackjack()
+    deckCount = 6
+    game = Blackjack(deckCount)
     game.run()
 
 if __name__ == "__main__":
