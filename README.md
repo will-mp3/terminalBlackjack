@@ -1,6 +1,7 @@
 # terminal_blackjack
 ## skeleton logic for GUI_blackjack project
 Blackjack implementation to be played in the terminal
+
 functionality supported:
 - multiple size decks
 - hit / stand / double
