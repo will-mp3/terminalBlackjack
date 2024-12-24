@@ -3,7 +3,7 @@ from card import Card
 
 class Blackjack:
 
-    def __init__(self, deck, table):
+    def __init__(self, deck):
         self.table = table
         self.deck = deck
         self.dealerHand, self.playerHand = [], []
@@ -182,7 +182,7 @@ class Blackjack:
 
 def main():
     deck = Deck()
-    game = Blackjack(deck, "NULL")
+    game = Blackjack(deck)
     game.run()
 
 if __name__ == "__main__":
