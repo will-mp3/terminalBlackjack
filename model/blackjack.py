@@ -1,5 +1,5 @@
-from deck import Deck
-from card import Card
+from .deck import Deck
+from .card import Card
 
 class Blackjack:
 
@@ -180,9 +180,11 @@ class Blackjack:
                 else:
                     continue
 
+"""
 def main():
     game = Blackjack()
     game.run()
 
 if __name__ == "__main__":
     main() 
+"""
