@@ -17,6 +17,8 @@ class Blackjack:
         self.dealerCount = 0
 
     def _playAgain(self):
+        print("Player has", self.playerChips, "chips remaining.")
+        print()
         choice = input("Would you like to play again? (Y/N) ")
         print()
         if choice == "Y":
@@ -80,6 +82,8 @@ class Blackjack:
         print()
         while 1:
             bet = input("BET AMOUNT: ")
+            print()
+            bet = int(bet)
             if bet <= self.playerChips:
                 break
             else:
@@ -156,9 +160,14 @@ class Blackjack:
         else:
             print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard())
             print()
-            while 1:
+            while self.dealerCount <= 17:
                 self._dealerHit()
-                if self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount > self.playerCount: 
+                if self.dealerCount > 21:
+                    print()
+                    print("You win!")
+                    self.playerChips += bet
+                    self._playAgain()
+                elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount > self.playerCount: 
                     print()
                     print("You lose.")
                     self.playerChips -= bet
