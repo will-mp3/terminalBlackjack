@@ -1,9 +1,8 @@
-from controller import *
-from model import *
-from view import *
+from model import Blackjack
 
 def main():
-    return -1
+    game = Blackjack()
+    game.run()
 
 if __name__ == "__main__":
     main()

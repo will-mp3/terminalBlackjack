@@ -3,15 +3,15 @@ from card import Card
 
 class Blackjack:
 
-    def __init__(self, deck):
-        self.table = table
-        self.deck = deck
+    def __init__(self):
+        self.deck = Deck()
         self.dealerHand, self.playerHand = [], []
         self.playerCount = 0
         self.dealerCount = 0
         self.playerChips = 100
 
     def _clear(self):
+        self.deck = Deck()
         self.dealerHand, self.playerHand = [], []
         self.playerCount = 0
         self.dealerCount = 0
@@ -181,8 +181,7 @@ class Blackjack:
                     continue
 
 def main():
-    deck = Deck()
-    game = Blackjack(deck)
+    game = Blackjack()
     game.run()
 
 if __name__ == "__main__":
