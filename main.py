@@ -1,4 +1,4 @@
-from model import Blackjack
+from model.blackjack import Blackjack
 
 def main():
     game = Blackjack()
