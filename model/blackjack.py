@@ -121,30 +121,38 @@ class Blackjack:
                 break
 
             elif move == "D":
-                # double bet logic
-                self.playerHand.append(self.deck.dealCard())
-                playerVal += self.playerHand[2].getVal()
-                break
+                if (bet * 2) <= self.playerChips:
+                    bet = bet * 2
+                    self.playerHand.append(self.deck.dealCard())
+                    playerVal += self.playerHand[2].getVal()
+                    break
             else:
                 print("Invalid response, please respond again.")
                 print()
         
         if self.playerCount > 21:
-            return
+            self.playerChips -= bet
+            self._playAgain()
         
         if self.dealerCount == 21:
             print("Dealer showing 21. You lose.")
-            return
+            self.playerChips -= bet
+            self._playAgain()
         elif self.dealerCount >= 17:
             if self.dealerCount > self.playerCount:
                 print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You lose.")
                 print()
+                self.playerChips -= bet
+                self._playAgain()
             elif self.dealerCount < self.playerCount:
                 print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You win!")
                 print()
+                self.playerChips += bet
+                self._playAgain()
             else:
                 print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". Push.")
                 print()
+                self._playAgain()
         else:
             print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard())
             print()
@@ -153,11 +161,13 @@ class Blackjack:
                 if self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount > self.playerCount: 
                     print()
                     print("You lose.")
-                    break
+                    self.playerChips -= bet
+                    self._playAgain()
                 elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount < self.playerCount:
                     print()
                     print("You win!")
-                    break
+                    self.playerChips += bet
+                    self._playAgain()
                 else:
                     continue
 
