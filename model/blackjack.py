@@ -128,7 +128,7 @@ class Blackjack:
                 if (bet * 2) <= self.playerChips:
                     bet = bet * 2
                     self.playerHand.append(self.deck.dealCard())
-                    playerVal += self.playerHand[2].getVal()
+                    self.playerCount += self.playerHand[2].getVal()
                     break
             else:
                 print("Invalid response, please respond again.")
