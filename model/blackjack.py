@@ -3,15 +3,16 @@ from .card import Card
 
 class Blackjack:
 
-    def __init__(self):
-        self.deck = Deck()
+    def __init__(self, deckCount):
+        self.deckCount = deckCount
+        self.deck = Deck(self.deckCount)
         self.dealerHand, self.playerHand = [], []
         self.playerCount = 0
         self.dealerCount = 0
         self.playerChips = 100
 
     def _clear(self):
-        self.deck = Deck()
+        self.deck = Deck(self.deckCount)
         self.dealerHand, self.playerHand = [], []
         self.playerCount = 0
         self.dealerCount = 0
