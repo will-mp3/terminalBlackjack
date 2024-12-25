@@ -82,6 +82,9 @@ class Blackjack:
     def run(self):
         self._clear()
 
+        print("You have", self.playerChips, "chips")
+        print()
+
         self.deck.shuffleDeck()
         print("Welcome to the table! Please take a seat and place your bets.")
         print()
