@@ -82,6 +82,7 @@ class Blackjack:
     def run(self):
         self._clear()
 
+        print()
         print("You have", self.playerChips, "chips")
         print()
 
