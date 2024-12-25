@@ -18,6 +18,10 @@ class Blackjack:
         self.dealerCount = 0
 
     def _playAgain(self):
+        
+        if self.playerChips == 0:
+            print("Out of chips.")
+            return
         print("Player has", self.playerChips, "chips remaining.")
         print()
         choice = input("Would you like to play again? (Y/N) ")
