@@ -18,7 +18,7 @@ class Blackjack:
         self.dealerCount = 0
 
     def _playAgain(self):
-        
+
         if self.playerChips == 0:
             print("Out of chips.")
             return
@@ -133,6 +133,8 @@ class Blackjack:
                 if (bet * 2) <= self.playerChips:
                     bet = bet * 2
                     self.playerHand.append(self.deck.dealCard())
+                    print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard(), ",", self.playerHand[2].printCard())
+                    print()
                     self.playerCount += self.playerHand[2].getVal()
                     break
             else:
