@@ -112,7 +112,7 @@ class Blackjack:
             print(",", self.dealerHand[2 + i].printCard(), end="")
         print()
 
-        self.dealerCount += self.dealerHand[len(self.dealerHand) - 1].getVal()
+        self.dealerCount = self._getCount("d")
 
     def run(self):
         self._clear()
@@ -144,8 +144,8 @@ class Blackjack:
         print("The dealer is showing a", self.dealerHand[0].printCard())
         print()
         print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard())
-        self.playerCount = self.playerHand[0].getVal() + self.playerHand[1].getVal()
-        self.dealerCount = self.dealerHand[0].getVal() + self.dealerHand[1].getVal()
+        self.playerCount = self._getCount("p")
+        self.dealerCount = self._getCount("d")
 
         if self._checkBJ():
             playerChips += bet * 1.5
@@ -174,7 +174,7 @@ class Blackjack:
                     self.playerHand.append(self.deck.dealCard())
                     print("You have", self.playerHand[0].printCard() + ",", self.playerHand[1].printCard(), ",", self.playerHand[2].printCard())
                     print()
-                    self.playerCount += self.playerHand[2].getVal()
+                    self.playerCount = self._getCount("p")
                     break
             else:
                 print("Invalid response, please respond again.")
