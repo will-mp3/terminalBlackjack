@@ -17,6 +17,41 @@ class Blackjack:
         self.playerCount = 0
         self.dealerCount = 0
 
+    def _getCount(self, person):
+        count = 0
+        hasAce = False
+
+        if person == "p":
+            for card in self.playerHand:
+                if card.card in ['Jack', 'Queen', 'King']:
+                    count += 10
+                elif card.card == 'Ace':
+                    hasAce = True
+                    count += 11
+                else:
+                    count += int(card.card)
+            
+            if count > 21 and hasAce:
+                count -= 10
+        
+            return count
+
+        if person == "d":
+            for card in self.dealerHand:
+                if card.card in ['Jack', 'Queen', 'King']:
+                    count += 10
+                elif card.card == 'Ace':
+                    hasAce = True
+                    count += 11
+                else:
+                    count += int(card.card)
+            
+            if count > 21 and hasAce:
+                count -= 10
+        
+            return count
+
+
     def _playAgain(self):
 
         if self.playerChips == 0:
@@ -62,7 +97,7 @@ class Blackjack:
             print(",", self.playerHand[2 + i].printCard(), end="")
         print()
 
-        self.playerCount += self.playerHand[len(self.playerHand) - 1].getVal()
+        self.playerCount = self._getCount("p")
                     
         val = self._cardEval()
 
