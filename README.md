@@ -1,4 +1,4 @@
-# terminal_blackjack
+# terminalBlackjack
 ## skeleton logic for GUI_blackjack project
 Blackjack implementation to be played in the terminal
 
