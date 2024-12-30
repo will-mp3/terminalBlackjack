@@ -114,6 +114,53 @@ class Blackjack:
 
         self.dealerCount = self._getCount("d")
 
+    def _dealerAction(self, bet):
+        if self.dealerCount == 21:
+            print("Dealer showing 21. You lose.")
+            self.playerChips -= bet
+            self._playAgain()
+        elif self.dealerCount >= 17:
+            if self.dealerCount > self.playerCount:
+                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You lose.")
+                print()
+                self.playerChips -= bet
+                self._playAgain()
+            elif self.dealerCount < self.playerCount:
+                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You win!")
+                print()
+                self.playerChips += bet
+                self._playAgain()
+            else:
+                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". Push.")
+                print()
+                self._playAgain()
+        else:
+            print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard())
+            print()
+            while self.dealerCount <= 17:
+                self._dealerHit()
+                if self.dealerCount > 21:
+                    print()
+                    print("You win!")
+                    self.playerChips += bet
+                    self._playAgain()
+                elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount > self.playerCount: 
+                    print()
+                    print("You lose.")
+                    self.playerChips -= bet
+                    self._playAgain()
+                elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount < self.playerCount:
+                    print()
+                    print("You win!")
+                    self.playerChips += bet
+                    self._playAgain()
+                elif self.dealerCount == self.playerCount:
+                    print()
+                    print("Push.")
+                    self._playAgain()
+                else:
+                    continue
+
     def run(self):
         self._clear()
 
@@ -184,44 +231,4 @@ class Blackjack:
             self.playerChips -= bet
             self._playAgain()
         
-        if self.dealerCount == 21:
-            print("Dealer showing 21. You lose.")
-            self.playerChips -= bet
-            self._playAgain()
-        elif self.dealerCount >= 17:
-            if self.dealerCount > self.playerCount:
-                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You lose.")
-                print()
-                self.playerChips -= bet
-                self._playAgain()
-            elif self.dealerCount < self.playerCount:
-                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". You win!")
-                print()
-                self.playerChips += bet
-                self._playAgain()
-            else:
-                print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard() + ". Push.")
-                print()
-                self._playAgain()
-        else:
-            print("Dealer showing", self.dealerHand[0].printCard()+ ",", self.dealerHand[1].printCard())
-            print()
-            while self.dealerCount <= 17:
-                self._dealerHit()
-                if self.dealerCount > 21:
-                    print()
-                    print("You win!")
-                    self.playerChips += bet
-                    self._playAgain()
-                elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount > self.playerCount: 
-                    print()
-                    print("You lose.")
-                    self.playerChips -= bet
-                    self._playAgain()
-                elif self.dealerCount < 21 and self.dealerCount >= 17 and self.dealerCount < self.playerCount:
-                    print()
-                    print("You win!")
-                    self.playerChips += bet
-                    self._playAgain()
-                else:
-                    continue
+        self._dealerAction(bet)
